@@ -58,18 +58,6 @@ while ($result = mysqli_fetch_array($select)) {
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/admin/settings.php?lang=<?=$Lang['lang'];?>">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                                <?=$Lang['account_settings'];?>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="glyphicon glyphicon-flag"></i>
-                                                <?=$Lang['help'];?>
-                                            </a>
-                                        </li>
-                                        <li>
                                             <a href="../index.php?lang=<?=$Lang['lang'];?>">
                                                 <i class="glyphicon glyphicon-exit"></i>
                                                 <?=$Lang['exit'];?>
