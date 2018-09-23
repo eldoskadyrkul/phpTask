@@ -1,0 +1,324 @@
+/* login_form */
+.language_block 
+{
+	background: linear-gradient(to bottom, #DE6262, #FFB88C);
+}
+.language_block .container {
+	background: transparent; 
+    border-radius: none; 
+    box-shadow: none;
+}
+.login_form, .register_form {
+	background: #DE6262;
+	background: -webkit-linear-gradient(to bottom, #FFB88C, #DE6262);
+	background: linear-gradient(to bottom, #FFB88C, #DE6262);
+	float:left;width:100%;
+	padding : 70px 0;
+}
+.form_group {
+	margin-bottom: 1rem;
+}
+label {
+	display: inline-block;
+}
+.form_control {
+	display: block; 
+	width: 100%; 
+	padding: .375rem .75rem; 
+	font-size: 1rem; line-height: 1.5;
+	color: #495057; 
+	background-color: #fff; 
+	background-clip: padding-box; 
+	border: 1px solid #ced4da; 
+	border-radius: .25rem; 
+	transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.form_check {
+	position: relative; 
+	display: block; 
+	padding-left: 1.25rem;
+}
+.btn {
+	display: inline-block; 
+	font-weight: 400; 
+	text-align: center; 
+	white-space: nowrap; 
+	vertical-align: middle;
+	-webkit-user-select: none; 
+	-moz-user-select: none; 
+	-ms-user-select: none; 
+	user-select: none; 
+	border: 1px solid transparent; 
+	padding: .375rem .75rem; 
+	font-size: 1rem; 
+	line-height: 1.5; 
+	border-radius: .25rem; 
+	transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out
+}
+.form_check_label {
+	margin-bottom:0;
+}
+.banner_sec{
+	background:url(../img/pexels-photo.jpg)  no-repeat left bottom; 
+	background-size:cover; 
+	min-height:500px; 
+	border-radius: 0 10px 10px 0; 
+	padding:0;
+}
+.container{
+	background:#fff; 
+	border-radius: 10px; 
+	box-shadow:15px 20px 0px rgba(0,0,0,0.1);
+}
+.carousel-inner{
+	border-radius:0 10px 10px 0;
+}
+.carousel-caption{
+	text-align:left; 
+	left:5%;
+}
+.login-text{
+	padding: 50px 30px; 
+	position:relative;
+}
+.login_text .copy-text
+{
+	position:absolute; 
+	width:80%; 
+	bottom:20px; 
+	font-size:13px; 
+	text-align:center;
+}
+.login_text .copy-text i{
+	color:#FEB58A;
+}
+.login_text .copy-text a{
+	color:#E36262;
+}
+.login_text h2{
+	margin-bottom:30px; 
+	font-weight:800; 
+	font-size:30px; 
+	color: #DE6262;
+}
+.login_text h2:after
+{
+	content:" "; 
+	width:100px; 
+	height:5px; 
+	background:#FEB58A; 
+	display:block; 
+	margin-top:20px; 
+	border-radius:3px; 
+	margin-left:auto;
+	margin-right:auto
+}
+.btn_login{
+	background: #DE6262; 
+	color:#fff; 
+	font-weight:600;
+	cursor: pointer;
+}
+.btn_obzor {
+	position: relative;
+	margin: -38px 0;
+	background: #DE6262;
+	color: #fff;
+	cursor: pointer;
+}
+.btn_reg {
+	background: #DE6262;
+	color: #fff;
+	margin: 5px auto;
+	cursor: pointer;
+}
+.btn_reg a {
+	color: #fff;
+}
+.btn_reg a:hover {
+	color: #fff;
+	text-decoration: none;
+}
+.alert_error {
+	color: #f00;
+	font-size: 15px;
+}
+#message {
+    display:none;
+    background: #f1f1f1;
+    color: #000;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+#message p {
+    padding: 10px 35px;
+    font-size: 18px;
+}
+.valid {
+    color: green;
+}
+
+.valid:before {
+    position: relative;
+    left: -35px;
+    content: "✔";
+}
+.invalid {
+    color: red;
+}
+
+.invalid:before {
+    position: relative;
+    left: -35px;
+    content: "✖";
+}
+.header {
+	background: #DE6262;
+	background: -webkit-linear-gradient(to bottom, #FFB88C, #DE6262);
+	background: linear-gradient(to bottom, #FFB88C, #DE6262);
+	float:left;
+    width:100%;
+	padding : 70px 0;
+}
+.profile {
+    margin: 20px 0;
+}
+.profile_bar {
+    padding: 20px 0 10px 0;
+    background: #fff;
+}
+.profile_userpic img {
+    float: none;
+    margin: 0 auto;
+    width: 50%;
+    height: 50%;
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+}
+.profile_usertitle {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profile_usertitle_name {
+    color: #5a7391;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.profile_usertitle_job {
+    text-transform: uppercase;
+    color: #5b9bd1;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.profile_userbuttons {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.profile_userbuttons .btn {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 5px;
+    margin-right: 5px;
+    width: 44%;
+}
+
+.profile_userbuttons .btn:last-child {
+    margin-right: 0px;
+}
+    
+.profile_usermenu {
+    margin-top: 30px;
+}
+
+.profile_usermenu ul li {
+    border-bottom: 1px solid #f0f4f7;
+}
+
+.profile_usermenu ul li:last-child {
+    border-bottom: none;
+}
+
+.profile_usermenu ul li a {
+    color: #93a3b5;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.profile_usermenu ul li a i {
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.profile_usermenu ul li a:hover {
+    background-color: #fafcfd;
+    color: #5b9bd1;
+}
+
+.profile_usermenu ul li.active {
+    border-bottom: none;
+}
+
+.profile_usermenu ul li.active a {
+    color: #5b9bd1;
+    background-color: #f6f9fb;
+    border-left: 2px solid #5b9bd1;
+    margin-left: -2px;
+}
+.profile_content {
+    padding: 20px;
+    background: #fff;
+    min-height: 460px;
+}
+.rezume h2 {
+    text-transform: uppercase;
+}
+.rezume .info {
+    padding: 15px;
+    font-size: 16px;
+}
+.rezume .info_name {
+    width: 50%;
+    float: left;
+    padding: 10px;
+    text-align: center;
+}
+.rezume .info_description {
+    width: 50%;
+    float: left;
+    padding: 10px;
+    text-align: left;
+}
+.update_error {
+	color: #f00;
+	font-size: 15px;
+    text-align: center;
+}
+.red_name {
+    padding: 20px;
+    width: 50%;
+    float: left;
+    text-align: center;
+}
+.red_description {
+    width: 50%;
+    padding: 10px;
+    float: left;
+}
+.red_description input {
+    width: 100%;
+    padding: 15px;
+}
+.sbm_red {
+    text-align: center;
+    margin: 20px;
+}
