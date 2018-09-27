@@ -1,26 +1,7 @@
 <?php
 include_once ("lang/lang_default.php");
 include_once ("includes/dbconnection.php");
-$_SESSION['Message'] = '';
-
-
-if (isset($_POST['submit'])) {
-	$sql_query = mysqli_query("SELECT id_user FROM login_user WHERE login_username='".mysqli_real_escape_string($_POST['inputUser'], $con)."' LIMIT 1", $con);
-	$data_sql = mysqli_fetch_assoc($sql_query);
-	
-	if ($data['login_password'] === md5(md5($_POST['inputPassword']))) {
-		$hash = md5(generateCode(10));
-	}
-    else {
-        $_SESSION['Message'] = $Lang['name_error'];
-    }
-	
-	setcookie("id", $data['id_user'], time()+60*60*24*30);
-	setcookie("hash", $hash, time()+60*60*24*30,null,null,null,true);
-	
-	header("Location: admin/admin.php?lang=".$Lang['lang']); 
-	exit();
-}
+include_once ("includes/login.php");
 ?>
 <!DOCTYPE html>
 <html>
