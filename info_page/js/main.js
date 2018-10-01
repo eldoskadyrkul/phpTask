@@ -1,55 +1,43 @@
-function PasswordValidator() {
-    var passwordstrength = document.getElementById("psw");
-    var regex = new Array();
-    regex.push("[A-Z]");
-    regex.push("[a-z]");
-    regex.push("[0-9]");
-    var passed = 0;
-    for (var i = 0; i < regex.length; i++) {
-        if (new RegExp(regex[i]).test(passwordstrength.value)) {
-            passed++;
+$(document).ready(function () {
+    $("#login").blur(function() {
+        var name = $(this).val();
+        if (name == '') {
+            $('#errors').text('Заполните имя');
+            $('#errors').css('display', 'block');
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "admin.php",
+                data: {funct: 'name', name: name},
+                success: function(data) {
+                    if (data == 1) {
+                        $('#errors').text('Такого пользователя нет');
+                        $('#errors').css('display', 'block');
+                    } else {
+                        $('#errors').css('display', 'none');}
+                    }
+                });
         }
-    }
-    if (passed > 8) {
-        alert("Valid");
-    }
-    else {
-        alert("Password must contain at least 1 capital letter,\n\n1 small letter, 1 number.");
-        return false;
-    }
-            }
-;(function($){
-  
-  /**
-   * jQuery function to prevent default anchor event and take the href * and the title to make a share popup
-   *
-   * @param  {[object]} e           [Mouse event]
-   * @param  {[integer]} intWidth   [Popup width defalut 500]
-   * @param  {[integer]} intHeight  [Popup height defalut 400]
-   * @param  {[boolean]} blnResize  [Is popup resizeabel default true]
-   */
-  $.fn.customerPopup = function (e, intWidth, intHeight, blnResize) {
-    
-    // Prevent default anchor event
-    e.preventDefault();
-    
-    // Set values for window
-    intWidth = intWidth || '500';
-    intHeight = intHeight || '400';
-    strResize = (blnResize ? 'yes' : 'no');
-
-    // Set title and open popup with focus on it
-    var strTitle = ((typeof this.attr('title') !== 'undefined') ? this.attr('title') : 'Social Share'),
-        strParam = 'width=' + intWidth + ',height=' + intHeight + ',resizable=' + strResize,            
-        objWindow = window.open(this.attr('href'), strTitle, strParam).focus();
-  }
-  
-  /* ================================================== */
-  
-  $(document).ready(function ($) {
-    $('.btn-success').on("click", function(e) {
-      $(this).customerPopup(e);
     });
-  });
-    
-}(jQuery));
+    $("#pass").blur(function() {
+        var pass = $(this).val();
+        var name = $("#name").val();
+        if (pass == '' || name=='') {
+            $('#errors').text('Заполните все поля');
+            $('#errors').css('display', 'block');
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "user.php",
+                data: {funct: 'pass', pass: pass, name: name},
+                    success: function(data) {if (data == 1) {
+                        $('#errors').text('Некоректная пара логин пароль');
+                        $('#errors').css('display', 'block');
+                    } else {
+                        $('#errors').css('display', 'none');
+                        $("#submit").attr('disabled', '');
+                    }}
+            });
+        }
+    });
+});
