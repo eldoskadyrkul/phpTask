@@ -35,7 +35,7 @@ while ($result = mysqli_fetch_array($select, MYSQLI_ASSOC)) {
                         <div class="col-md-3">
                             <div class="profile_bar">
                                 <div class="profile_userpic">
-                                    <img src="../images/<?=$result['image_url'];?>" class="img-responsive" alt="">
+                                    <img src="data:image;base64,<?=$result['image_url'];?>" class="img-responsive" alt="">
                                 </div>
                                 <div class="profile_usertitle">
                                     <div class="profile_usetitle_name">
