@@ -70,13 +70,6 @@ include_once ("includes/reg_user.php");
 						</div>
 					</div>
 					<div class="alert alert_error"><?=$_SESSION['message'];?></div>
-                    <div id="message">
-                      <h3><?=$Lang['password_title'];?></h3>
-                      <p id="letter" class="invalid"><?=$Lang['password_lowercase'];?></p>
-                      <p id="capital" class="invalid"><?=$Lang['password_uppercase'];?></p>
-                      <p id="number" class="invalid"><?=$Lang['password_number']?></p>
-                      <p id="length" class="invalid"><?=$Lang['password_minimum'];?></p>
-                    </div>
 				</div>
 			</div>
 		</div>
