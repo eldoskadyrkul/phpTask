@@ -4,24 +4,37 @@ $_SESSION['Message'] = '';
 
 
 if (isset($_POST['submit'])) {
-	
-	$username = mysqli_real_escape_string($con, trim($_POST['inputUser']));
-	$pwd = mysqli_real_escape_string($con, trim($_POST['inputPassword']));
-	
-	if (!empty($username) && (!empty($pwd))) {
-		$sql_query = "SELECT `id_user`, `login_username` FROM `login_user` WHERE `login_username` = '$username' AND `login_password` = '$pwd'";
-		$data = mysqli_query($con, $sql_query);
-		if (mysqli_num_rows($data) > 0) {
-			$row = mysqli_fetch_assoc($data);
-			setcookie('userid', $row['id_user'], time() + (60*60*24*30));
-			setcookie('username', $row['login_username'], time() + (60*60*24*30));
-			header("Location: admin/admin.php?lang=". $Lang['lang']);
-		} else {
-			header("Location: index.php?lang=". $Lang['lang']);
-			$_SESSION['Message'] = $Lang['name_error'];
-		}
-	} else {
-		$_SESSION['Message'] = $Lang['fields_empty'];
-	}
+	CheckPassword();
+}
+
+function CheckPassword() {
+    include ("includes/dbconnection.php");
+    include ("lang/lang_default.php");
+    $username = mysqli_real_escape_string($con, $_POST['inputUser']);
+	$pwd = mysqli_real_escape_string($con, $_POST['inputPassword']);
+    $new_pwd = md5($pwd);
+    $sql_query = "SELECT `login_username`, `login_password` FROM `login_user` WHERE `login_username` = '$username' AND `login_password` = '$pwd'";
+    $data = mysqli_query($con, $sql_query);
+    $num_rows = mysqli_num_rows($data);
+    
+    if ($num_rows != 0) {
+        while ($row = mysqli_fetch_assoc($data)) {
+            $db_user = $row['login_username'];
+            $db_pass = $row['login_password'];
+        }
+        if ($username == $db_user) {
+            if ($new_pwd == $db_pass) {
+                header('Location:admin/admin.php?lang=ru');
+            }
+            else 
+            {
+                echo 'Password not match';
+                header('Location: index.php?lang=ru');
+            }
+        } else {
+            $_SESSION['Message'] = $Lang['error'];
+        }
+    }
+   
 }
 ?>
