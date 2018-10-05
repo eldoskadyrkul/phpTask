@@ -12,7 +12,7 @@ function CheckPassword() {
     include ("includes/dbconnection.php");
     include ("lang/lang_default.php");
     $username = mysqli_real_escape_string($con, $_POST['inputUser']);
-    $pwd = mysqli_real_escape_string($con, $_POST['inputPassword']);
+	$pwd = mysqli_real_escape_string($con, $_POST['inputPassword']);
     $new_pwd = md5($pwd);
     $sql_query = "SELECT `login_username`, `login_password` FROM `login_user` WHERE `login_username` = '$username' AND `login_password` = '$new_pwd'";
     $data = mysqli_query($con, $sql_query);
@@ -34,7 +34,7 @@ function CheckPassword() {
         }
     }
     else {
-        echo "<script>alert('');</script>";
+        echo "<script>alert('You dont correct login or username');</script>";
     }
    
 }
