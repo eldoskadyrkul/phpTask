@@ -2,6 +2,7 @@
 include_once ("lang/lang_default.php");
 include_once ("includes/dbconnection.php");
 include_once ("includes/login.php");
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,7 +22,7 @@ include_once ("includes/login.php");
 			<div class="container">
 				<div class="row">					
 					<div class="copy-text">
-						<div class="lang text-right" name="lang">
+						<div class="lang text-left" name="lang">
 							<a href="index.php?lang=ru"><img src="img/ru.png"></a> 
 							<a href="index.php?lang=en"><img src="img/en.png"></a> 
 						</div>
@@ -34,18 +35,18 @@ include_once ("includes/login.php");
 				<div class="row">	
 					<div class="col-xl-4 login_text">
 						<h2 class="text-center"><?=$Lang['name_head'];?></h2>
-						<form class="form" method="post" action="index.php?lang".<?=$Lang['lang']?>>
+						<form class="form" method="post" action="index.php?lang=<?=$Lang['lang']?>">
 							<div class="form_group">
 								<label for="inputUser" class="text-uppercase"><?=$Lang['name_user'];?></label>
-								<input type="text" name="inputUser" class="form_control" placeholder="" required autocomplete="off">
+								<input id="login" type="text" name="inputUser" class="form_control" placeholder="" required autocomplete="off">
 							</div>
 							<div class="form_group">
 								<label for="inputPassword" class="text-uppercase"><?=$Lang['name_password'];?></label>
-								<input type="password" name="inputPassword" class="form_control" placeholder="" required autocomplete="off">
+								<input id="pass" type="password" name="inputPassword" class="form_control" placeholder="" required autocomplete="off">
 							</div>
 							<div class="form_check">
 								<label class="form_check_label">
-									<small><?=$_SESSION['Message'];?></small>
+									<small id="errors"><?=$_SESSION['Message'];?></small>
 								</label>
 								<button name="submit" type="submit" class="btn btn_login float-right"><?=$Lang['name_submit'];?></button>
 							</div>
