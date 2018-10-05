@@ -1,9 +1,9 @@
 <?php 
-ini_set('error_reporting', E_ALL);
+session_start();
 include_once ("../lang/lang_default.php");
 include_once ("../includes/dbconnection.php");
-$select = mysqli_query($con, "SELECT * FROM register_user JOIN about_user ON register_user.id_register = about_user.reg_id");
-while ($result = mysqli_fetch_array($select, MYSQLI_ASSOC)) { 
+
+$select = mysqli_query($con, "SELECT * FROM register_user JOIN about_user ON register_user.id_reg = about_user.reg_id");
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,6 +29,9 @@ while ($result = mysqli_fetch_array($select, MYSQLI_ASSOC)) {
                     </div>
                 </div>
             </div>
+            <?php
+                while ($result = mysqli_fetch_array($select)) {
+            ?>
             <div class="header">
                 <div class="container">
                     <div class="row profile">
@@ -39,14 +42,14 @@ while ($result = mysqli_fetch_array($select, MYSQLI_ASSOC)) {
                                 </div>
                                 <div class="profile_usertitle">
                                     <div class="profile_usetitle_name">
-                                        <?=$result['first_name'];?> <?=$result['last_name'];?>
+                                        <?=$result['reg_firstname'];?> <?=$result['reg_lastname'];?>
                                     </div>
                                     <div class="profile_usertitle_job">
-                                        <?=$result['user_activity'];?>
+                                        <?=$result['reg_activity'];?>
                                     </div>
                                 </div>
                                 <div class="profile_userbuttons">
-                                    <button type="button" class="btn btn-success btn-sm" onclick="location.href='<?=$result['url_profile'];?>'" title="VK share" target="_blank"><?=$Lang['follow'];?></button>
+                                    <a type="button" class="btn btn-success btn-sm" href="<?=$result['url_profile'];?>" title="VK share" target="_blank"><?=$Lang['follow'];?></a>
                                     <button type="button" class="btn btn-danger btn-sm" onclick="location.href='mailto:<?=$result['email']?>'"><?=$Lang['message'];?></button>
                                 </div>
                                 <div class="profile_usermenu">
@@ -78,25 +81,25 @@ while ($result = mysqli_fetch_array($select, MYSQLI_ASSOC)) {
                                             <p><?=$Lang['firstname'];?>:</p>
                                         </div>
                                         <div class="info_description">
-                                            <p><?=$result['first_name'];?></p>
+                                            <p><?=$result['reg_firstname'];?></p>
                                         </div>
                                         <div class="info_name">
                                             <p><?=$Lang['lastname'];?>:</p>
                                         </div>
                                         <div class="info_description">
-                                            <p><?=$result['last_name'];?></p>
+                                            <p><?=$result['reg_lastname'];?></p>
                                         </div>
                                         <div class="info_name">
                                             <p><?=$Lang['activity_profile'];?>:</p>
                                         </div>
                                         <div class="info_description">
-                                            <p><?=$result['user_activity'];?></p>
+                                            <p><?=$result['reg_activity'];?></p>
                                         </div>
                                         <div class="info_name">
                                             <p><?=$Lang['birthday_profile'];?>:</p>
                                         </div>
                                         <div class="info_description">
-                                            <p><?=$result['user_birhday'];?></p>
+                                            <p><?=$result['reg_brthday'];?></p>
                                         </div>
                                         <div class="info_name">
                                             <p><?=$Lang['email_profile'];?>:</p>
@@ -114,7 +117,7 @@ while ($result = mysqli_fetch_array($select, MYSQLI_ASSOC)) {
                                             <p><?=$Lang['info_profile'];?>:</p>
                                         </div>
                                         <div class="info_description">
-                                            <p><?=$result['information_about'];?></p>
+                                            <p><?php echo $result['information_about'];?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -127,7 +130,5 @@ while ($result = mysqli_fetch_array($select, MYSQLI_ASSOC)) {
     </body>
 </html>
 <?php
-                                              }
-											  mysqli_close($con);
-											  session_destroy();
+                                              };
 ?>
