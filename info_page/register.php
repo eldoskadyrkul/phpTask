@@ -32,7 +32,7 @@ include_once ("includes/reg_user.php");
 				<div class="row">	
 					<div class="col-xl-12 register_text">
 						<h2 class="text-center"><?=$Lang['s_register'];?></h2>
-						<form class="form" method="POST" action="register.php?lang=<?=$Lang['lang'];?>" onsubmit="PasswordValidator();">
+						<form class="form" method="POST" action="register.php?lang=<?=$Lang['lang'];?>" enctype="multipart/form-data">
 							<div class="form_group">
 								<label for="inputFirstName" class="text-uppercase"><?=$Lang['name_firstname'];?></label>
 								<input type="text" name="inputFirstNames" class="form_control" placeholder="" autocomplete="off">
@@ -46,8 +46,28 @@ include_once ("includes/reg_user.php");
 								<input type="text" name="inputActivitys" class="form_control" placeholder="" autocomplete="off">
 							</div>
 							<div class="form_group">
+								<label for="inputWork" class="text-uppercase"><?=$Lang['name_work'];?></label>
+                                <textarea name="inputWork" class="form_control" placeholder="" autocomplete="off"></textarea>
+							</div>
+							<div class="form_group">
+								<label for="inputEmail" class="text-uppercase"><?=$Lang['name_email'];?></label>
+								<input type="email" name="inputEmail" class="form_control" placeholder="" autocomplete="off">
+							</div>
+							<div class="form_group">
+								<label for="inputUrl" class="text-uppercase"><?=$Lang['name_url'];?></label>
+								<input type="text" name="inputUrls" class="form_control" placeholder="" autocomplete="off">
+							</div>
+							<div class="form_group">
+								<label for="inputInfo" class="text-uppercase"><?=$Lang['name_info'];?></label>
+                                <textarea type="text" name="inputInfo" class="form_control" autocomplete="off"></textarea>
+							</div>
+							<div class="form_group">
 								<label for="inputBirthday" class="text-uppercase"><?=$Lang['name_birthday'];?></label>
 								<input type="date" name="inputBirthdays" class="form_control" placeholder="" autocomplete="off">
+							</div>
+							<div class="form_group">
+								<label for="inputPhoto" class="text-uppercase"><?=$Lang['name_photo'];?></label>
+								<input type="file" name="inputPhotos" class="form_control" placeholder="" autocomplete="off">
 							</div>
 							<div class="form_group">
 								<label for="inputUser" class="text-uppercase"><?=$Lang['name_reg_user'];?></label>
@@ -70,6 +90,13 @@ include_once ("includes/reg_user.php");
 						</div>
 					</div>
 					<div class="alert alert_error"><?=$_SESSION['message'];?></div>
+                    <div id="message">
+                      <h3><?=$Lang['password_title'];?></h3>
+                      <p id="letter" class="invalid"><?=$Lang['password_lowercase'];?></p>
+                      <p id="capital" class="invalid"><?=$Lang['password_uppercase'];?></p>
+                      <p id="number" class="invalid"><?=$Lang['password_number']?></p>
+                      <p id="length" class="invalid"><?=$Lang['password_minimum'];?></p>
+                    </div>
 				</div>
 			</div>
 		</div>
