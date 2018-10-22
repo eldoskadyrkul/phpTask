@@ -1,6 +1,21 @@
+/* welcome_page */
+.welcome {
+    width: 100%;
+    display: block;
+    padding: 50px;
+    text-align: center;
+    color: #fff;
+    margin: 50px auto;
+}
+.language_block .language {
+    width: 100%;
+    text-align: center;
+    padding: 0 0 150px;
+}
 /* login_form */
 .language_block 
 {
+    display: block;
 	background: linear-gradient(to bottom, #DE6262, #FFB88C);
 }
 .language_block .container {
@@ -12,7 +27,8 @@
 	background: #DE6262;
 	background: -webkit-linear-gradient(to bottom, #FFB88C, #DE6262);
 	background: linear-gradient(to bottom, #FFB88C, #DE6262);
-	float:left;width:100%;
+	float:left;
+    width:100%;
 	padding : 70px 0;
 }
 .form_group {

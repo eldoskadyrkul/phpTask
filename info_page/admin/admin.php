@@ -3,7 +3,7 @@ session_start();
 include_once ("../lang/lang_default.php");
 include_once ("../includes/dbconnection.php");
 
-$select = mysqli_query($con, "SELECT * FROM register_user JOIN about_user ON register_user.id_reg = about_user.reg_id");
+$select = mysqli_query($con, "SELECT * FROM register_user JOIN about_user");
 ?>
 <!DOCTYPE html>
 <html>
@@ -78,16 +78,10 @@ $select = mysqli_query($con, "SELECT * FROM register_user JOIN about_user ON reg
                                     </h2>
                                     <div class="info">
                                         <div class="info_name">
-                                            <p><?=$Lang['firstname'];?>:</p>
+                                            <p><?=$Lang['full_name'];?>:</p>
                                         </div>
                                         <div class="info_description">
-                                            <p><?=$result['reg_firstname'];?></p>
-                                        </div>
-                                        <div class="info_name">
-                                            <p><?=$Lang['lastname'];?>:</p>
-                                        </div>
-                                        <div class="info_description">
-                                            <p><?=$result['reg_lastname'];?></p>
+                                            <p><?=$result['reg_firstname'];?> <?=$result['reg_lastname'];?></p>
                                         </div>
                                         <div class="info_name">
                                             <p><?=$Lang['activity_profile'];?>:</p>

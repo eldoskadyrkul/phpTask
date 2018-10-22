@@ -23,15 +23,15 @@ function addLogin() {
     /* объявление переменных */
     $user_login = mysqli_real_escape_string($con, $_POST['inputUsers']);
     $user_pwd = md5($_POST['inputPasswords']);
-    
+    $id = mysqli_insert_id($con);
     /* SQL запрос */
-    $sql1 = "INSERT INTO login_user(id_user, login_username, login_password) VALUES ('','$user_login','$user_pwd')";
-    
+    $sql1 = "INSERT INTO login_user(id_user, login_username, login_password, reg_id, about_id) VALUES (DEFAULT,'$user_login','$user_pwd', '$id', '$id')";
+    print_r($sql1);
     /* проверка SQL запроса */
     if (mysqli_query($con, $sql1) === true) {
         $_SESSION['message'] = 'succesfully';
     } else {
-        $_SESSION['message'] = $Lang['error_user'];
+        // $_SESSION['message'] = $Lang['error_user'];
     }
     CheckLogin();
     PasswordLength();
@@ -47,8 +47,7 @@ function addRegister() {
 	$user_brtday = mysqli_real_escape_string($con, $_POST['inputBirthdays']);
     
     /* SQL запрос */
-    $sql = "INSERT INTO register_user(reg_firstname, reg_lastname, reg_activity, reg_brthday, about_id) VALUES ('$user_fn','$user_ln', '$user_active', '$user_brtday', '')";
-    
+    $sql = "INSERT INTO register_user(id_reg, reg_firstname, reg_lastname, reg_activity, reg_brthday) VALUES (DEFAULT,'$user_fn','$user_ln', '$user_active', '$user_brtday')";
     /* проверка SQL запроса */
     if (mysqli_query($con, $sql) === true) {
         $_SESSION['message'] = 'error_user';
@@ -90,7 +89,7 @@ function addInfo() {
     }
     
     /* SQL запрос */
-    $sql2 = "INSERT INTO about_user(id_about, work_about, information_about, url_profile, email, image_url, reg_id) VALUES ('', '$user_work', '$user_info', '$user_url', '$user_email', '$user_avatars', '')";
+    $sql2 = "INSERT INTO about_user(id_about, work_about, information_about, url_profile, email, image_url) VALUES (DEFAULT, '$user_work', '$user_info', '$user_url', '$user_email', '$user_avatars')";
     
     /* проверка SQL запроса */
     if (mysqli_query($con, $sql2) === true) {
@@ -118,13 +117,14 @@ function CheckLogin() {
     $user_login = mysqli_real_escape_string($con, $_POST['inputUsers']);
     
     /* SQL запрос */
-    $re_user = "SELECT login_username FROM login_user WHERE login_username=='$user_login'";
-    $check_user = mysqli_num_rows($re_user);
-    
-    if ($check_user != 0) {
-        echo 'This username is already registered! Please type another username';
-    } else {
-        echo 'This username isnt registered';
+    $re_user = "SELECT login_username FROM login_user WHERE login_username='$user_login'";
+    $sql_res = mysqli_query($con, $re_user);
+    while ($check_user = mysqli_fetch_array($sql_res)) {
+        if ($user_login != $check_user['login_username']) {
+           $_SESSION['message'] = 'This username is already registered! Please type another username';
+        } else {
+           $_SESSION['message'] = 'This username isnt registered';
+        }
     }
 }
 
@@ -138,9 +138,13 @@ function PasswordLength() {
     
     /* длина пароля */
     if (strlen($user_pwd) > 8) {
-        echo 'Success!';
+        $_SESSION['message'] = 'Success!';
     } else {
-        echo 'Your password is short';
+        $_SESSION['message'] = 'Your password is short';
     }
+}
+
+function UserID() {
+    
 }
 ?>
