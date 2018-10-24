@@ -35,7 +35,7 @@ include_once ("includes/login.php");
 				<div class="row">	
 					<div class="col-xl-4 login_text">
 						<h2 class="text-center"><?=$Lang['name_head'];?></h2>
-						<form class="form" method="post" action="admin/admin.php?lang=<?=$Lang['lang']?>">
+						<form class="form" method="post" action="main.php?lang=<?=$Lang['lang']?>">
 							<div class="form_group">
 								<label for="inputUser" class="text-uppercase"><?=$Lang['name_user'];?></label>
 								<input id="login" type="text" name="inputUser" class="form_control" placeholder="" required autocomplete="off">
