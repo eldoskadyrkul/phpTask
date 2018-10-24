@@ -61,7 +61,7 @@ $select = mysqli_query($con, "SELECT * FROM register_user JOIN about_user");
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="../index.php?lang=<?=$Lang['lang'];?>">
+                                            <a href="../main.php?lang=<?=$Lang['lang'];?>">
                                                 <i class="glyphicon glyphicon-exit"></i>
                                                 <?=$Lang['exit'];?>
                                             </a>
