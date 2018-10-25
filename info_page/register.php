@@ -84,6 +84,8 @@ include_once ("includes/reg_user.php");
 							<div class="form_check">
 								<button name="reg" type="submit" class="btn btn_reg float-right"><?=$Lang['name_reg'];?></button>
 							</div>
+							<input type="hidden" name="about_id" value="">
+							<input type="hidden" name="reg_id" value="">
 						</form>						
 						<div class="form_check">
 							<a href="main.php?lang=<?=$Lang['lang'];?>"><button name="submit" type="submit" class="btn btn_reg float-left"><?=$Lang['name_signin'];?></button></a>
