@@ -2,127 +2,129 @@
 session_start();
 include_once ("../lang/lang_default.php");
 include_once ("../includes/dbconnection.php");
+include_once ("../includes/session_store.php");
 
-$select = mysqli_query($con, "SELECT * FROM register_user JOIN about_user");
-?>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title><?=$Lang['page_title'];?></title>
-        <link href="../css/style.css" rel="stylesheet" type="text/css">
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    </head>
-    <body>
-        <div class="main_wrapper">
-            <div class="language_block">
-                <div class="container">
-                    <div class="row">					
-                        <div class="copy-text">
-                            <div class="lang text-right" name="lang">
-                                <a href="admin.php?lang=ru"><img src="../img/ru.png"></a> 
-                                <a href="admin.php?lang=en"><img src="../img/en.png"></a> 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php
-                while ($result = mysqli_fetch_array($select)) {
-            ?>
-            <div class="header">
-                <div class="container">
-                    <div class="row profile">
-                        <div class="col-md-3">
-                            <div class="profile_bar">
-                                <div class="profile_userpic">
-                                    <img src="data:image;base64,<?=$result['image_url'];?>" class="img-responsive" alt="">
-                                </div>
-                                <div class="profile_usertitle">
-                                    <div class="profile_usetitle_name">
-                                        <?=$result['reg_firstname'];?> <?=$result['reg_lastname'];?>
-                                    </div>
-                                    <div class="profile_usertitle_job">
-                                        <?=$result['reg_activity'];?>
-                                    </div>
-                                </div>
-                                <div class="profile_userbuttons">
-                                    <a type="button" class="btn btn-success btn-sm" href="<?=$result['url_profile'];?>" title="VK share" target="_blank"><?=$Lang['follow'];?></a>
-                                    <button type="button" class="btn btn-danger btn-sm" onclick="location.href='mailto:<?=$result['email']?>'"><?=$Lang['message'];?></button>
-                                </div>
-                                <div class="profile_usermenu">
-                                    <ul class="nav">
-                                        <li class="active">
-                                            <a href="admin.php?lang=<?=$Lang['lang'];?>">
-                                                <i class="glyphicon glyphicon-home"></i>
-                                                <?=$Lang['overview'];?>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="../main.php?lang=<?=$Lang['lang'];?>">
-                                                <i class="glyphicon glyphicon-exit"></i>
-                                                <?=$Lang['exit'];?>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="profile-content">
-                                <div class="rezume">
-                                    <h2 class="text-center">
-                                        <?=$Lang['about_info'];?>
-                                    </h2>
-                                    <div class="info">
-                                        <div class="info_name">
-                                            <p><?=$Lang['full_name'];?>:</p>
-                                        </div>
-                                        <div class="info_description">
-                                            <p><?=$result['reg_firstname'];?> <?=$result['reg_lastname'];?></p>
-                                        </div>
-                                        <div class="info_name">
-                                            <p><?=$Lang['activity_profile'];?>:</p>
-                                        </div>
-                                        <div class="info_description">
-                                            <p><?=$result['reg_activity'];?></p>
-                                        </div>
-                                        <div class="info_name">
-                                            <p><?=$Lang['birthday_profile'];?>:</p>
-                                        </div>
-                                        <div class="info_description">
-                                            <p><?=$result['reg_brthday'];?></p>
-                                        </div>
-                                        <div class="info_name">
-                                            <p><?=$Lang['email_profile'];?>:</p>
-                                        </div>
-                                        <div class="info_description">
-                                            <p><?=$result['email'];?></p>
-                                        </div>
-                                        <div class="info_name">
-                                            <p><?=$Lang['work_profile'];?>:</p>
-                                        </div>
-                                        <div class="info_description">
-                                            <p><?=$result['work_about'];?></p>
-                                        </div>
-                                        <div class="info_name">
-                                            <p><?=$Lang['info_profile'];?>:</p>
-                                        </div>
-                                        <div class="info_description">
-                                            <p><?php echo $result['information_about'];?></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
-<?php
-                                              };
+if (isset($_GET['user_id'])) {
+    $id = $_GET['user_id'];
+    $select = mysqli_query($con, "SELECT `id_user`, `reg_firstname`, `reg_lastname`, `reg_activity`, `reg_brthday`, `work_about`, `information_about`, `url_profile`, `email`, `image_url`, `image_name` FROM login_user, register_user, about_user WHERE login_user.id_user = '$id' AND login_user.about_id = about_user.id_about AND login_user.reg_id = register_user.id_reg GROUP BY login_user.id_user");
+    $result = mysqli_fetch_array($select);
+    $query = mysqli_query($con, "SELECT `id_user` FROM `login_user`");
+    $image_res = $result['image_name'];
+    if ($image_res != null) {
+        $image_res = "../img/".$result['image_name'];
+    } else {
+        $image_res = "../img/person.png";
+    }
+    include_once("../common/header.php");
+    echo "<div class='main_wrapper'>";
+        echo "<div class='language_block'>";
+            echo "<div class='container'>";
+                echo "<div class='row'>";       
+                    echo "<div class='copy-text'>";
+                        echo "<div class='lang text-right' name='lang'>";
+                            echo "<a href='admin.php?lang=ru&user_id=".$result['id_user']."'><img src='../img/ru.png'></a>";
+                            echo "<a href='admin.php?lang=en&user_id=".$result['id_user']."'><img src='../img/en.png'></a>";
+                        echo "</div>";
+                    echo "</div>";
+                echo "</div>";
+            echo "</div>";
+        echo "</div>";
+        echo "<div class='header'>";
+            echo "<div class='container'>";
+                echo "<div class='row profile'>";
+                    echo "<div class='col-md-3'>";
+                        echo "<div class='profile_bar'>";
+                                    echo "<div class='profile_userpic'>";
+                                        echo "<img src='". $image_res ."' class='img-responsive' alt='' />";
+                                    echo "</div>";
+                                    echo "<div class='profile_usertitle'>";
+                                        echo "<div class='profile_usetitle_name'>";
+                                            echo "<span>". $result['reg_firstname'] ."</span> <span>". $result['reg_lastname'] ."</span>";
+                                        echo "</div>";
+                                        echo "<div class='profile_usertitle_job'>";
+                                            echo "<span>". $result['reg_activity'] ."</span>";
+                                        echo "</div>";
+                                    echo "</div>";
+                                    echo "<div class='profile_userbuttons'>";
+                                        echo "<a type='button' class='btn btn-success btn-sm' href='".$result['url_profile']."' title='VK share' target='_blank'>". $Lang['follow'] ."</a>";
+                                        echo "<button type='button' class='btn btn-danger btn-sm' onclick='location.href='mailto:".$result['email']."'>".$Lang['message']."</button>";
+                                    echo "</div>";
+                                    echo "<div class='profile_usermenu'>";
+                                        echo "<ul class='nav'>";
+                                            echo "<li class='active'>";
+                                                echo "<a href='admin.php?lang=".$Lang['lang']."&user_id=".$result['id_user']."'>";
+                                                    echo "<i class='glyphicon glyphicon-home'></i>";
+                                                    echo "<span>".$Lang['overview']."</span>";
+                                                echo "</a>";
+                                            echo "</li>";
+                                            echo "<li>";
+                                                echo "<a href='settings.php?lang=".$Lang['lang']."&user_id=".$result['id_user']."'>";
+                                                    echo "<i class='glyphicon glyphicon-user'></i>";
+                                                    echo "<span>".$Lang['account_settings']."</span>";
+                                                echo "</a>";
+                                            echo "</li>";
+                                            echo "<li>";
+                                                echo "<a href='../main.php?lang=".$Lang['lang']."'>";
+                                                    echo "<i class='glyphicon glyphicon-off'></i>";
+                                                    echo "<span>".$Lang['exit']. "</span>";
+                                                echo "</a>";
+                                            echo "</li>";
+                                        echo "</ul>";
+                                    echo "</div>";
+                                echo "</div>";
+                            echo "</div>";
+                        echo "<div class='col-md-9'>";
+                            echo "<div class='profile-content'>";
+                                echo "<div class='rezume'>";
+                                    echo "<h2 class='text-center'>".$Lang['about_info']."</h2>";
+                                    echo "<div class='info'>";
+                                        echo "<div class='info_name'>";
+                                            echo "<p>".$Lang['full_name']. ":</p>";
+                                        echo "</div>";
+                                        echo "<div class='info_description'>";
+                                            echo "<p><span>".$result['reg_firstname']."</span> </span>" .$result['reg_lastname']."</span></p>";
+                                        echo "</div>";
+                                        echo "<div class='info_name'>";
+                                            echo "<p>".$Lang['activity_profile'].":</p>";
+                                        echo "</div>";
+                                        echo "<div class='info_description'>";
+                                            echo "<p>".$result['reg_activity']."</p>";
+                                        echo "</div>";
+                                        echo "<div class='info_name'>";
+                                            echo "<p>".$Lang['birthday_profile'].":</p>";
+                                        echo "</div>";
+                                        echo "<div class='info_description'>";
+                                            echo "<p>".$result['reg_brthday']."</p>";
+                                        echo "</div>";
+                                        echo "<div class='info_name'>";
+                                            echo "<p>".$Lang['email_profile'].":</p>";
+                                        echo "</div>";
+                                        echo "<div class='info_description'>";
+                                            echo "<p>".$result['email']."</p>";
+                                        echo "</div>";
+                                        echo "<div class='info_name'>";
+                                            echo "<p>".$Lang['work_profile'].":</p>";
+                                        echo "</div>";
+                                        echo "<div class='info_description'>";
+                                            echo "<p>".$result['work_about']."</p>";
+                                        echo "</div>";
+                                        echo "<div class='info_name'>";
+                                            echo "<p>".$Lang['info_profile'].":</p>";
+                                        echo "</div>";
+                                        echo "<div class='info_description'>";
+                                            echo "<p>".$result['information_about']."</p>";
+                                        echo "</div>";
+                                    echo "</div>";
+                                echo "</div>";
+                            echo "</div>";
+                        echo "</div>";
+                    echo "</div>";
+                echo "</div>";
+            echo "</div>";
+        echo "</div>";
+    echo "</div>";
+    include_once("../common/footer.php");
+}  else {
+    print("Извините, где-то произошла ошибка");
+}
 ?>
