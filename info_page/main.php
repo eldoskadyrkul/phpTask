@@ -4,6 +4,7 @@ include ("includes/dbconnection.php");
 include_once ("includes/login.php");
 include_once ("includes/session_store.php");
 
+
 $sql_query = 'SELECT id_user, `login_username`, `login_password` FROM `login_user` WHERE id_user';
 $data = mysqli_query($con, $sql_query);
 $row = mysqli_fetch_array($data);
@@ -14,6 +15,7 @@ echo "<html>";
 		echo "<title>".$Lang['auth_title']."</title>";
 		echo "<link href='css/style.css' rel='stylesheet' type='text/css'>";
 		echo "<link href='css/media.css' rel='stylesheet' type='text/css'>";
+		echo "<link rel='icon' type='image/png' href='favicon.png'";
 		echo "<link href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet' type='text/css'>";
 		echo "<link href='//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet' id='bootstrap-css'>";
 		echo "<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>";
