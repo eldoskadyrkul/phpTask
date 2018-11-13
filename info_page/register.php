@@ -35,72 +35,81 @@ include_once ("includes/reg_user.php");
 						<form class="form" method="POST" action="register.php?lang=<?=$Lang['lang'];?>" enctype="multipart/form-data">
 							<div class="form_group">
 								<label for="inputFirstName" class="text-uppercase"><?=$Lang['name_firstname'];?></label>
-								<input type="text" name="inputFirstNames" class="form_control" placeholder="" autocomplete="off">
+								<input type="text" name="inputFirstNames" class="form_control" placeholder="" autocomplete="off" required="required">
 							</div>
 							<div class="form_group">
 								<label for="inputLastname" class="text-uppercase"><?=$Lang['name_lastname'];?></label>
-								<input type="text" name="inputLastnames" class="form_control" placeholder="" autocomplete="off">
+								<input type="text" name="inputLastnames" class="form_control" placeholder="" autocomplete="off" required="required">
 							</div>
 							<div class="form_group">
 								<label for="inputActivity" class="text-uppercase"><?=$Lang['name_activity'];?></label>
-								<input type="text" name="inputActivitys" class="form_control" placeholder="" autocomplete="off">
+								<input type="text" name="inputActivitys" class="form_control" placeholder="" autocomplete="off" required="required">
 							</div>
 							<div class="form_group">
 								<label for="inputWork" class="text-uppercase"><?=$Lang['name_work'];?></label>
-                                <textarea name="inputWork" class="form_control" placeholder="" autocomplete="off"></textarea>
+                                <textarea name="inputWork" class="form_control" placeholder="" autocomplete="off" required="required"></textarea>
 							</div>
 							<div class="form_group">
 								<label for="inputEmail" class="text-uppercase"><?=$Lang['name_email'];?></label>
-								<input type="email" name="inputEmail" class="form_control" placeholder="" autocomplete="off">
+								<input type="email" name="inputEmail" class="form_control" placeholder="" autocomplete="off" required="required">
 							</div>
 							<div class="form_group">
 								<label for="inputUrl" class="text-uppercase"><?=$Lang['name_url'];?></label>
-								<input type="text" name="inputUrls" class="form_control" placeholder="" autocomplete="off">
+								<input type="text" name="inputUrls" class="form_control" placeholder="" autocomplete="off" required="required">
 							</div>
 							<div class="form_group">
 								<label for="inputInfo" class="text-uppercase"><?=$Lang['name_info'];?></label>
-                                <textarea type="text" name="inputInfo" class="form_control" autocomplete="off"></textarea>
+                                <textarea type="text" name="inputInfo" class="form_control" autocomplete="off" required="required"></textarea>
 							</div>
 							<div class="form_group">
 								<label for="inputBirthday" class="text-uppercase"><?=$Lang['name_birthday'];?></label>
-								<input type="date" name="inputBirthdays" class="form_control" placeholder="" autocomplete="off">
+								<input type="date" name="inputBirthdays" class="form_control" placeholder="" autocomplete="off" required="required">
 							</div>
 							<div class="form_group">
 								<label for="inputPhoto" class="text-uppercase"><?=$Lang['name_photo'];?></label>
-								<input type="file" name="inputPhotos" class="form_control" placeholder="" autocomplete="off">
+								<input type="file" name="inputPhotos" class="form_control" placeholder="" autocomplete="off" required="required" accept="image/png">
 							</div>
 							<div class="form_group">
 								<label for="inputUser" class="text-uppercase"><?=$Lang['name_reg_user'];?></label>
-								<input type="text" name="inputUsers" class="form_control" placeholder="" required autocomplete="off">
+								<input type="text" name="inputUsers" class="form_control" placeholder="" autocomplete="off" required="required">
 							</div>
 							<div class="form_group">
 								<label for="inputPassword" class="text-uppercase"><?=$Lang['name_password'];?></label>
-								<input id="psw" type="password" name="inputPasswords" class="form_control" placeholder="" required autocomplete="off">
+								<input id="psw" type="password" name="inputPasswords" class="form_control" placeholder="" autocomplete="off" required="required">
 							</div>
 							<div class="form_group">
 								<label for="inputPasswordCorrect" class="text-uppercase"><?=$Lang['name_correct'];?></label>
-								<input type="password" name="inputPasswordCorrects" class="form_control" placeholder="" required autocomplete="off">
+								<input type="password" name="inputPasswordCorrects" class="form_control" placeholder="" autocomplete="off" required="required">
 							</div>
 							<div class="form_check">
 								<button name="reg" type="submit" class="btn btn_reg float-right"><?=$Lang['name_reg'];?></button>
 							</div>
-							<input type="hidden" name="about_id" value="">
-							<input type="hidden" name="reg_id" value="">
+							<input type="hidden" id="about_id" name="about_id">
+							<input type="hidden" id="reg_id" name="reg_id" >
+							<input type="hidden" id="user_id" name="user_id">
 						</form>						
 						<div class="form_check">
-							<a href="main.php?lang=<?=$Lang['lang'];?>"><button name="submit" type="submit" class="btn btn_reg float-left"><?=$Lang['name_signin'];?></button></a>
+							<a href="main.php?lang=<?=$Lang['lang'];?>"><button id="submit" name="submit" type="submit" class="btn btn_reg float-left"><?=$Lang['name_signin'];?></button></a>
 						</div>
 					</div>
 					<div class="alert alert_error"><?=$_SESSION['message'];?></div>
-                    <div id="message">
-                      <h3><?=$Lang['password_title'];?></h3>
-                      <p id="letter" class="invalid"><?=$Lang['password_lowercase'];?></p>
-                      <p id="capital" class="invalid"><?=$Lang['password_uppercase'];?></p>
-                      <p id="number" class="invalid"><?=$Lang['password_number']?></p>
-                      <p id="length" class="invalid"><?=$Lang['password_minimum'];?></p>
-                    </div>
 				</div>
 			</div>
 		</div>
+		<script>
+           function random(min,max)
+            {
+                return Math.floor(Math.random()*(max-min+1)+min);
+            }
+            var initial = 0;
+            var count = initial;
+            setInterval(function() {
+                var variation = 1;
+                count += variation
+                document.getElementById("about_id").value = count;
+                document.getElementById("reg_id").value = count;
+                document.getElementById("user_id").value = count;
+            }, 10000)
+        </script>
 	</body>
 </html>
