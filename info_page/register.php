@@ -8,6 +8,7 @@ include_once ("includes/reg_user.php");
 		<meta charset="UTF-8">
 		<title><?=$Lang['reg_title'];?></title>
 		<link href="css/style.css" rel="stylesheet" type="text/css">
+		<link rel="icon" type="image/png" href="../favicon.png" >
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" type="text/css">
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
